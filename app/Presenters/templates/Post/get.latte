@@ -1,0 +1,42 @@
+{block content}
+<table>
+
+    <tr>
+        <th>ID</th>
+        <th>Jmeno</th>
+        <th>Popis</th>
+        <th>Pohlavi</th>
+        <th>Zeme</th>
+        <th>Question</th>
+    </tr>
+
+    {foreach $posts as $post}
+
+    <tr>
+        <td>{$post->id}</td>
+        <td>{$post->name}</td>
+        <td>{$post->description}</td>
+        <td>{$post->gender}</td>
+        <td>{$post->country}</td>
+        <td>{$post->question}</td>
+    </tr>
+    {/foreach}
+</table>
+
+<div class="pagination">
+    {if !$paginator->isFirst()}
+            <a n:href="get, 1">První</a>
+&nbsp;|&nbsp;
+    <a n:href="get, $paginator->page-1">Předchozí</a>
+    &nbsp;|&nbsp;
+    {/if}
+
+    Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+
+	{if !$paginator->isLast()}
+    &nbsp;|&nbsp;
+    <a n:href="get, $paginator->getPage() + 1">Další</a>
+&nbsp;|&nbsp;
+    <a n:href="get, $paginator->getPageCount()">Poslední</a>
+        {/if}
+</div>
