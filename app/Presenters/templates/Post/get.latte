@@ -2,41 +2,78 @@
 <table>
 
     <tr>
-        <th>ID</th>
-        <th>Jmeno</th>
-        <th>Popis</th>
-        <th>Pohlavi</th>
-        <th>Zeme</th>
-        <th>Question</th>
+        <th>ID
+            <a n:href="sortPosts! 'id','ASC'"><input type="submit" value="ASC"><br><a/>
+                <a n:href="sortPosts! 'id','DESC'"><input type="submit" value="DESC"><a/><br>
+        </th>
+        <th>Jmeno
+            <a n:href="sortPosts! 'name','ASC'"><input type="submit" value="ASC"><br><a/>
+                <a n:href="sortPosts! 'name','DESC'"><input type="submit" value="DESC"><a/><br>
+        </th>
+        <th>Popis
+            <a n:href="sortPosts! 'description','ASC'"><input type="submit" value="ASC"><br><a/>
+                <a n:href="sortPosts! 'description','DESC'"><input type="submit" value="DESC"><a/><br>
+        </th>
+        <th>Pohlavi
+            <a n:href="sortPosts! 'gender','ASC'"><input type="submit" value="ASC"><br><a/>
+                <a n:href="sortPosts! 'gender','DESC'"><input type="submit" value="DESC"><a/><br>
+        </th>
+        <th>Zeme
+            <a n:href="sortPosts! 'country','ASC'"><input type="submit" value="ASC"><br><a/>
+                <a n:href="sortPosts! 'country','DESC'"><input type="submit" value="DESC"><a/><br>
+        </th>
+        <th>Question
+            <a n:href="sortPosts! 'question','ASC'"><input type="submit" value="ASC"><br><a/>
+                <a n:href="sortPosts! 'question','DESC'"><input type="submit" value="DESC"><a/><br>
+        </th>
+
     </tr>
 
     {foreach $posts as $post}
 
-    <tr>
-        <td>{$post->id}</td>
-        <td>{$post->name}</td>
-        <td>{$post->description}</td>
-        <td>{$post->gender}</td>
-        <td>{$post->country}</td>
-        <td>{$post->question}</td>
-    </tr>
+        <tr>
+            <td>{$post->id}</td>
+            <td>{$post->name}</td>
+            <td>{$post->description}</td>
+            <td>{$post->gender}</td>
+            <td>{$post->country}</td>
+            <td>{$post->question}</td>
+        </tr>
+
     {/foreach}
 </table>
 
 <div class="pagination">
     {if !$paginator->isFirst()}
-            <a n:href="get, 1">První</a>
-&nbsp;|&nbsp;
-    <a n:href="get, $paginator->page-1">Předchozí</a>
-    &nbsp;|&nbsp;
+        <a n:href="get, 1">První</a>
+        &nbsp;|&nbsp;
+        <a n:href="get, $paginator->page-1">Předchozí</a>
+        &nbsp;|&nbsp;
     {/if}
 
-    Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+        Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
 
 	{if !$paginator->isLast()}
-    &nbsp;|&nbsp;
-    <a n:href="get, $paginator->getPage() + 1">Další</a>
-&nbsp;|&nbsp;
-    <a n:href="get, $paginator->getPageCount()">Poslední</a>
-        {/if}
+        &nbsp;|&nbsp;
+        <a n:href="get, $paginator->getPage() + 1">Další</a>
+        &nbsp;|&nbsp;
+        <a n:href="get, $paginator->getPageCount()">Poslední</a>
+    {/if}
+
 </div>
+
+<h2>Filtr</h2>
+
+<form style="text-align:center;" method="get">
+    <label>
+        Search
+        <input type="text" name="keyword" autocomplete="off">
+    </label>
+    <select name="column">
+        <option value="name">name</option>
+        <option value="gender">gender</option>
+        <option value="prcie">price</option>
+    </select>
+
+    <input type="submit" value="Search"><br>
+</form>
